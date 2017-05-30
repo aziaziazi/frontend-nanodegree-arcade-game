@@ -1,7 +1,7 @@
 const ROW_SIZE = 83;
 const COLUMN_SIZE = 101;
 
-const ROW_NUMBER = 6;
+const ROW_NUMBER = 5;
 const COLUMN_NUMBER = 5;
 
 const ENTITIE_Y_OFFSET = -25;
@@ -66,7 +66,7 @@ Enemy.prototype.update = function(dt) {
 
 var Player = function() {
     const PLAYER_INIT_X = COLUMN_SIZE*2; // vertical middle
-    const PLAYER_INIT_Y = ROW_SIZE*5; // bottom line
+    const PLAYER_INIT_Y = ROW_SIZE*4; // bottom line
     const PLAYERSPRITE = returnRandom(PLAYERS_SPRITES) // random avatar
 
     Entitie.call(this, PLAYER_INIT_X, PLAYER_INIT_Y, PLAYERSPRITE);
@@ -117,6 +117,7 @@ document.addEventListener('keydown', function(e) {
 var winLevel = function(){
     console.log('winLevel!')
     score++
+
     player = new Player()
 }
 
@@ -140,4 +141,5 @@ var initEnemies = function() {
 
 initPlayer()
 initEnemies()
-var score = 1;
+var score = 0;
+var higth_score = 0;

@@ -26,7 +26,7 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 505;
-    canvas.height = 606;
+    canvas.height = 470;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -97,6 +97,9 @@ var Engine = (function(global) {
 
     function collision() {
         console.log('collision!')
+        if (score > higth_score){
+            higth_score = score
+        }
         score = 0;
         player = new Player()
     }
@@ -123,23 +126,22 @@ var Engine = (function(global) {
      */
     function render() {
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/grass-block.png',   // Grass row
+                'images/stone-block.png',   // Stone row
+                'images/stone-block.png',   // Stone row
+                'images/stone-block.png',   // Stone row
+                'images/grass-block.png',    // Grass row
             ],
-            numRows = 6,
-            numCols = 5,
+            ROW_NUMBER = 5,
+            COLUMN_NUMBER = 5,
             row, col;
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
          * portion of the "grid"
          */
-        for (row = 0; row < numRows; row++) {
-            for (col = 0; col < numCols; col++) {
+        for (row = 0; row < ROW_NUMBER; row++) {
+            for (col = 0; col < COLUMN_NUMBER; col++) {
                 /* The drawImage function of the canvas' context element
                  * requires 3 parameters: the image to draw, the x coordinate
                  * to start drawing and the y coordinate to start drawing.
@@ -156,8 +158,16 @@ var Engine = (function(global) {
         ctx.fillStyle="lightgrey"
         ctx.textAlign="center";
         ctx.fillText(score, 50,100)
+
+
+        // Render hight score
+        ctx.font="30px Futura";
+        ctx.fillStyle="lightgrey"
+        ctx.textAlign="center";
+        ctx.fillText(higth_score, 450,100)
+
         renderEntities();
-    }
+        }
 
     /* This function is called by the render function and is called on each game
      * tick. Its purpose is to then call the render functions you have defined

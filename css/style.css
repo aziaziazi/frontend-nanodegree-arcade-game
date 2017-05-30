@@ -2,8 +2,9 @@ body {
     text-align: center;
 }
 
-canvas {
+/*canvas {
   transform:
     perspective(2000px)
     rotateX(20deg)
 }
+*/
