@@ -1,6 +1,5 @@
 const ROW_SIZE = 83;
 const COLUMN_SIZE = 101;
-
 const ROW_NUMBER = 5;
 const COLUMN_NUMBER = 5;
 
@@ -9,13 +8,13 @@ const ENTITIE_Y_OFFSET = -25;
 const ENEMY_SPEED = 200
 const ENEMY_INIT_CHANCE = 0.3
 const ENEMY_INIT_SPEED = 300
+
 const PLAYER_BOARD_LIMIT = {
     LEFT: 0,
     RIGHT: COLUMN_SIZE*(COLUMN_NUMBER-1),
-    TOP: ROW_SIZE,
+    TOP: 0,
     BOTTOM: ROW_SIZE*(ROW_NUMBER-1),
 }
-
 const PLAYERS_SPRITES = [
     'images/char-boy.png',
     'images/char-cat-girl.png',
@@ -25,16 +24,6 @@ const PLAYERS_SPRITES = [
 ]
 
 const ENEMIES_SPRITE = 'images/Rock.png';
-
-// const ENTITIE_SIZE = {
-//     WIDTH: 101,
-//     HEIGHT: 171,
-// };
-
-// const ENTITIE_CENTER = {
-//     X: 50.5,
-//     Y: 124,
-// };
 
 var returnRandom = function(arrayOfValues) {
     return arrayOfValues[Math.floor(Math.random() * arrayOfValues.length)];
@@ -84,7 +73,7 @@ Player.prototype.update = function(dt) {
     }else if (this.y < PLAYER_BOARD_LIMIT.TOP) { // Win on upside escape
         winLevel();
     };
-    // console.log('Player','x:', this.x, 'y:', this.y);
+    // console.log('x:', this.x, 'y:', this.y);
 };
 
 Player.prototype.handleInput = function(pressedKey) {

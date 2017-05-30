@@ -132,9 +132,13 @@ var Engine = (function(global) {
                 'images/stone-block.png',   // Stone row
                 'images/grass-block.png',    // Grass row
             ],
+            rowWhiteBackground = 'images/grass-block.png',
             ROW_NUMBER = 5,
             COLUMN_NUMBER = 5,
             row, col;
+
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0, canvas.width, canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
