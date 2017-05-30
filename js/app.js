@@ -56,9 +56,9 @@ Enemy.prototype.update = function(dt) {
 var Player = function() {
     const PLAYER_INIT_X = COLUMN_SIZE*2; // vertical middle
     const PLAYER_INIT_Y = ROW_SIZE*4; // bottom line
-    const PLAYERSPRITE = returnRandom(PLAYERS_SPRITES) // random avatar
-
-    Entitie.call(this, PLAYER_INIT_X, PLAYER_INIT_Y, PLAYERSPRITE);
+    this.playerSprite = returnRandom(PLAYERS_SPRITES) // random avatar
+    this.lastSide = "bottom";
+    Entitie.call(this, PLAYER_INIT_X, PLAYER_INIT_Y, this.playerSprite);
 };
 
 Player.prototype = Object.create(Entitie.prototype);
@@ -70,12 +70,22 @@ Player.prototype.update = function(dt) {
         this.x += COLUMN_SIZE;
     }else if (this.y > PLAYER_BOARD_LIMIT.BOTTOM) { // Prevent downside escape
         this.y -= ROW_SIZE;
-    }else if (this.y < PLAYER_BOARD_LIMIT.TOP) { // Win on upside escape
-        winLevel();
-    };
+    }else if (this.y < PLAYER_BOARD_LIMIT.TOP) { // Prevent upside escape
+        this.y += ROW_SIZE;;
+    }else if (this.y == PLAYER_BOARD_LIMIT.TOP) { // Event on arriving top
+        this.arriveSafe("top")
+    }else if (this.y == PLAYER_BOARD_LIMIT.BOTTOM) { // Event on arriving bottom
+        this.arriveSafe("bottom")
+    }
     // console.log('x:', this.x, 'y:', this.y);
 };
+Player.prototype.arriveSafe = function(side) {
+    if (side != this.lastSide) {
+        side == "top" ? this.lastSide = "top" : this.lastSide = "bottom";
+        winLevel();
+    }
 
+};
 Player.prototype.handleInput = function(pressedKey) {
     switch(pressedKey) {
         case "left":
@@ -106,8 +116,6 @@ document.addEventListener('keydown', function(e) {
 var winLevel = function(){
     console.log('winLevel!')
     score++
-
-    player = new Player()
 }
 
 var player = null;
