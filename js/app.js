@@ -24,6 +24,8 @@ const PLAYERS_SPRITES = [
     'images/char-princess-girl.png',
 ]
 
+const ENEMIES_SPRITE = 'images/Rock.png';
+
 // const ENTITIE_SIZE = {
 //     WIDTH: 101,
 //     HEIGHT: 171,
@@ -53,7 +55,7 @@ Entitie.prototype.render = function() {
 var Enemy = function() {
     const ENEMY_INIT_X = -150;
     const ENEMY_INIT_Y = returnRandom([ROW_SIZE, ROW_SIZE*2, ROW_SIZE*3])
-    Entitie.call(this, ENEMY_INIT_X, ENEMY_INIT_Y, 'images/enemy-bug.png');
+    Entitie.call(this, ENEMY_INIT_X, ENEMY_INIT_Y, ENEMIES_SPRITE);
 };
 
 Enemy.prototype = Object.create(Entitie.prototype);

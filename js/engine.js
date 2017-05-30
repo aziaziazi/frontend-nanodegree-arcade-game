@@ -153,7 +153,7 @@ var Engine = (function(global) {
 
         // Render the score
         ctx.font="30px Futura";
-        ctx.fillStyle="white"
+        ctx.fillStyle="lightgrey"
         ctx.textAlign="center";
         ctx.fillText(score, 50,100)
         renderEntities();
@@ -194,7 +194,8 @@ var Engine = (function(global) {
         'images/char-cat-girl.png',
         'images/char-horn-girl.png',
         'images/char-pink-girl.png',
-        'images/char-princess-girl.png'
+        'images/char-princess-girl.png',
+        'images/Rock.png',
     ]);
     Resources.onReady(init);
 
