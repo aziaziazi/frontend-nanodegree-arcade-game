@@ -80,7 +80,25 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+    }
+
+    const MIN_PROXIMITY = 51 // Just more than half entity width
+
+    function checkCollisions() {
+        allEnemies.forEach(function(enemy) {
+            if (enemy.x <= player.x + MIN_PROXIMITY
+                && enemy.x >= player.x - MIN_PROXIMITY
+                && enemy.y == player.y) {
+                collision()
+            }
+        });
+    }
+
+    function collision() {
+        console.log('collision!')
+        score = 0;
+        player = new Player()
     }
 
     /* This is called by the update function and loops through all of the
@@ -104,9 +122,6 @@ var Engine = (function(global) {
      * they are just drawing the entire screen over and over.
      */
     function render() {
-        /* This array holds the relative URL to the image used
-         * for that particular row of the game level.
-         */
         var rowImages = [
                 'images/water-block.png',   // Top row is water
                 'images/stone-block.png',   // Row 1 of 3 of stone
@@ -136,6 +151,11 @@ var Engine = (function(global) {
             }
         }
 
+        // Render the score
+        ctx.font="30px Futura";
+        ctx.fillStyle="white"
+        ctx.textAlign="center";
+        ctx.fillText(score, 50,100)
         renderEntities();
     }
 
@@ -159,7 +179,6 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -171,7 +190,11 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png'
     ]);
     Resources.onReady(init);
 
