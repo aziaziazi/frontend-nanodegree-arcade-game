@@ -80,11 +80,14 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
+        // Check the collisions
         checkCollisions();
     }
 
     const MIN_PROXIMITY = 51 // Just more than half entity width
 
+    // if the player and one of each enemies position's are the same (balanced with MIN_PROXIMITY),
+    // then fire collision()
     function checkCollisions() {
         allEnemies.forEach(function(enemy) {
             if (enemy.x <= player.x + MIN_PROXIMITY
@@ -95,6 +98,8 @@ var Engine = (function(global) {
         });
     }
 
+    // reset the score
+    // reasign a new player
     function collision() {
         console.log('collision!')
         if (score > higth_score){
@@ -137,8 +142,9 @@ var Engine = (function(global) {
             COLUMN_NUMBER = 5,
             row, col;
 
-    ctx.fillStyle = "white";
-    ctx.fillRect(0,0, canvas.width, canvas.height);
+        // render a white background to cover the previous entities' positions
+        ctx.fillStyle = "white";
+        ctx.fillRect(0,0, canvas.width, canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -157,18 +163,17 @@ var Engine = (function(global) {
             }
         }
 
+        // ScoreText Class
+        var ScoreText = function(text, x, y) {
+            ctx.font="30px Futura";
+            ctx.fillStyle="lightgrey"
+            ctx.textAlign="center";
+            ctx.fillText(text, x, y)
+        }
+
         // Render the score
-        ctx.font="30px Futura";
-        ctx.fillStyle="lightgrey"
-        ctx.textAlign="center";
-        ctx.fillText(score, 50,100)
-
-
-        // Render hight score
-        ctx.font="30px Futura";
-        ctx.fillStyle="lightgrey"
-        ctx.textAlign="center";
-        ctx.fillText(higth_score, 450,100)
+        var currentScore = new ScoreText(score, 50, 100)
+        var hightScore = new ScoreText(higth_score, 450,100)
 
         renderEntities();
         }
